@@ -5,18 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tic_tac_toe"
         mc:Ignorable="d"
-        Title="Tic Tac Toe!" Height="500" Width="500" ResizeMode="NoResize">
+        Title="Tic Tac Toe!" Height="500" Width="500" ResizeMode="NoResize" ContentRendered="Window_ContentRendered" >
     <Window.Resources>
+        <Style TargetType="Button">
+            <EventSetter Event="Click" Handler="ButtonClick" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+
+        <Style x:Key="MyButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
-    <Grid>
+    <Grid x:Name="GamePole">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160"></ColumnDefinition>
+            <ColumnDefinition x:Name="YBorder"  Width="15"></ColumnDefinition>
             <ColumnDefinition Width="150"></ColumnDefinition>
-            <ColumnDefinition Width="15"></ColumnDefinition>
+            <ColumnDefinition x:Name="YBorder1"  Width="15"></ColumnDefinition>
             <ColumnDefinition Width="150"></ColumnDefinition>
-            <ColumnDefinition Width="15"></ColumnDefinition>
-            <ColumnDefinition Width="150"></ColumnDefinition>
-
-
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="150"></RowDefinition>
@@ -26,7 +41,7 @@
             <RowDefinition Height="150"></RowDefinition>
         </Grid.RowDefinitions>
 
-
-
     </Grid>
+
+  
 </Window>
