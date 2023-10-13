@@ -19,9 +19,31 @@ namespace Tic_tac_toe
     /// </summary>
     public partial class WindowWin : Window
     {
-        public WindowWin()
+        private MainWindow mainWindow;
+        Player Player = new();
+        public WindowWin(MainWindow main    )
         {
-            InitializeComponent();
+           InitializeComponent();
+           LableWin.Content = GetWinner();
+            mainWindow = main;
         }
+
+        public string GetWinner()
+        {
+            if (Player.GetFirstPlayer())
+            {
+                return ("X Win the Game");
+            }
+            else if (Player.GetSecondPlayer())
+            {
+                return ("O Win the Game");
+            }
+            return ("");
+        }
+
+            private void NewGameEvent(object sender, RoutedEventArgs e)
+            {
+                mainWindow.MakeUnnable(true);
+            }
     }
 }

@@ -16,18 +16,16 @@ namespace Tic_tac_toe
     public partial class MainWindow : Window
     {
         public bool isNextO = true;
+        private WindowWin windowWin;
         List<Button> buttonsTop = new List<Button>();
         List<Button> buttonsMid = new List<Button>();
         List<Button> buttonsBot = new List<Button>();
-        WindowWin windowWin = new();
         Player player = new();
 
 
         public MainWindow()
         {
             InitializeComponent();
-
-
         }
 
         private void Window_ContentRendered(object sender, System.EventArgs e)
@@ -75,15 +73,17 @@ namespace Tic_tac_toe
             Button clickedButton = (Button)sender;
             bool isWin = false;
             
-            if (isNextO == true)
+            if (player.GetFirstPlayer())
             {
                 clickedButton.Content = "X";
-                isNextO = false;
+                player.TurnSecondPlayer();
+                /*player.SetWinner(true);*/
             }
             else
             {
-                isNextO = true;
-                clickedButton.Content = "O";
+                player.TurnFirstPlayer();
+/*                player.SetWinner(false);
+*/                clickedButton.Content = "O";
             }
             clickedButton.FontSize = 70;
             clickedButton.IsEnabled = false;
@@ -91,8 +91,9 @@ namespace Tic_tac_toe
             
             if (isWin == true)
             {
-                windowWin.Show();
-                MakeUnnable();
+                
+                OpenSecondWindow();
+                MakeUnnable(false);
             }
         }
 
@@ -121,7 +122,6 @@ namespace Tic_tac_toe
             }
             if (buttonsTop[2].Content != null && buttonsTop[2].Content == buttonsMid[1].Content && buttonsMid[1].Content == buttonsBot[0].Content)
             {
-                windowWin.Show();
                 return true;
             }
 
@@ -145,14 +145,39 @@ namespace Tic_tac_toe
 
             return false;
         }
-        private void MakeUnnable()
+        public void MakeUnnable(bool newgame)
         {
             List<Button> buttons = new List<Button>();
             buttons.AddRange(buttonsTop);
             buttons.AddRange(buttonsMid);
             buttons.AddRange(buttonsBot);
-            
-            buttons.ForEach(b => b.IsEnabled = false);
+            if (newgame == false)
+            {
+
+                buttons.ForEach(b => b.IsEnabled = false);
+            }
+            else
+            {
+                player.TurnFirstPlayer();
+                buttons.ForEach(b => b.Content = null);
+                buttons.ForEach(b => b.IsEnabled = true);
+                CloseSecondWindow();
+            }
+
+        }
+
+        private void OpenSecondWindow()
+        {
+            windowWin = new WindowWin(this);
+            windowWin.Show();
+        }
+
+        private void CloseSecondWindow()
+        {
+            if (windowWin != null)
+            {
+                windowWin.Close(); // Закрыть второе окно
+            }
         }
 
 

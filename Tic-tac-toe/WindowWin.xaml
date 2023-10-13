@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tic_tac_toe"
         mc:Ignorable="d"
-        Title="WindowWin" Height="150" Width="300">
+        Title="WindowWin" Height="150" Width="350">
     <Grid>
-        <Label HorizontalAlignment="Center" Content="Someone Win" FontSize="35" FontFamily="Cascadia Mono"/>
-        <Button Width="100" Height="30" Content="New Game" Background="Green" FontSize="19" FontFamily="Cascadia Mono"  HorizontalAlignment="Left" Margin="10,70,0,10"/>
+        <Label x:Name="LableWin" HorizontalAlignment="Center" Content="Someone Win" FontSize="35" FontFamily="Cascadia Mono"/>
+        <Button Width="100" Height="30" Click="NewGameEvent" Content="New Game" Background="Green" FontSize="19" FontFamily="Cascadia Mono"  HorizontalAlignment="Left" Margin="10,70,0,10"/>
         <Button Width="100" Height="30" Content="History" HorizontalAlignment="Right" Margin="10,70,10,10" FontSize="19" FontFamily="Cascadia Mono" />
 
     </Grid>
