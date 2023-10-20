@@ -15,17 +15,19 @@ namespace Tic_tac_toe
     /// </summary>
     public partial class MainWindow : Window
     {
-        public bool isNextO = true;
         private WindowWin windowWin;
-        List<Button> buttonsTop = new List<Button>();
-        List<Button> buttonsMid = new List<Button>();
-        List<Button> buttonsBot = new List<Button>();
-        Player player = new();
-
+        private Player player;
+        private bool isWin = false;
+        public List<Button> buttonsTop = new List<Button>();
+        public List<Button> buttonsMid = new List<Button>();
+        public List<Button> buttonsBot = new List<Button>();
+       
 
         public MainWindow()
         {
             InitializeComponent();
+            player = new Player();
+            player.TurnFirstPlayer();
         }
 
         private void Window_ContentRendered(object sender, System.EventArgs e)
@@ -68,27 +70,27 @@ namespace Tic_tac_toe
 
         }
 
-        private void ButtonClick(object sender, RoutedEventArgs e)
+        public void ButtonClick(object sender, RoutedEventArgs e)
         {
             Button clickedButton = (Button)sender;
-            bool isWin = false;
-            
-            if (player.GetFirstPlayer())
+
+            if (player.GetWinner() == false)
             {
                 clickedButton.Content = "X";
                 player.TurnSecondPlayer();
-                /*player.SetWinner(true);*/
             }
             else
             {
+                clickedButton.Content = "O";
+                player.CheckLastPlayer( true);
                 player.TurnFirstPlayer();
-/*                player.SetWinner(false);
-*/                clickedButton.Content = "O";
+
             }
             clickedButton.FontSize = 70;
             clickedButton.IsEnabled = false;
+
             isWin = CheckWin();
-            
+
             if (isWin == true)
             {
                 
@@ -153,7 +155,6 @@ namespace Tic_tac_toe
             buttons.AddRange(buttonsBot);
             if (newgame == false)
             {
-
                 buttons.ForEach(b => b.IsEnabled = false);
             }
             else
@@ -168,7 +169,7 @@ namespace Tic_tac_toe
 
         private void OpenSecondWindow()
         {
-            windowWin = new WindowWin(this);
+            windowWin = new WindowWin(this,player);
             windowWin.Show();
         }
 
@@ -180,10 +181,15 @@ namespace Tic_tac_toe
             }
         }
 
+        private void SoloPlay_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
 
+        private void Multiplayer_Click(object sender, RoutedEventArgs e)
+        {
 
-
+        }
     }
 }
 

@@ -20,25 +20,27 @@ namespace Tic_tac_toe
     public partial class WindowWin : Window
     {
         private MainWindow mainWindow;
-        Player Player = new();
-        public WindowWin(MainWindow main    )
+        private Player player;
+        public WindowWin(MainWindow main,Player currentPlayer)
         {
            InitializeComponent();
            LableWin.Content = GetWinner();
-            mainWindow = main;
+           mainWindow = main;
+           player = currentPlayer;
         }
 
         public string GetWinner()
         {
-            if (Player.GetFirstPlayer())
+            if (player.ReturnLastPlayer() == true)
             {
                 return ("X Win the Game");
             }
-            else if (Player.GetSecondPlayer())
+            else if(player.ReturnLastPlayer() == false)
             {
                 return ("O Win the Game");
             }
-            return ("");
+            return ("wtf");
+ 
         }
 
             private void NewGameEvent(object sender, RoutedEventArgs e)

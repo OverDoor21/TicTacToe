@@ -8,42 +8,39 @@ namespace Tic_tac_toe
 {
     public class Player
     {
-        private bool FirstPlayer { get; set; } = true;
-        private bool SecondPlayer { get; set; } = false;
+        private bool IsNextTurnSecond { get; set; } 
         //Last Player True if First and False - Second
-        private bool LastPlayer { get; set; }
+        private bool LastPlayerX { get; set; }
   
 
        public bool TurnFirstPlayer()
         {
-            SecondPlayer = false;
-            return FirstPlayer = true;
+            return IsNextTurnSecond = false;
         }
         public bool TurnSecondPlayer()
         {
-           FirstPlayer = false;
-           return SecondPlayer = true;
+           return IsNextTurnSecond = true;
         }
 
-        public bool GetFirstPlayer()
+        public bool ReturnLastPlayer()
         {
-            return this.FirstPlayer;
+            return LastPlayerX;
         }
 
-        public bool GetSecondPlayer()
+
+        public bool CheckLastPlayer( bool value)
         {
-            return this.SecondPlayer;
+            LastPlayerX = value;
+            return LastPlayerX;
         }
-        
+
+
+
         public bool GetWinner()
         {
-            return LastPlayer;
+            return IsNextTurnSecond;
         }
 
-        public void SetWinner(bool value)
-        {
-            this.LastPlayer = value;
-        }
 
     }
 }
